@@ -1,26 +1,11 @@
+import { bigCards } from '@/data/Lists'
 import { Box, Grid, Typography } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import React from 'react'
 
 function BigCards() {
 
-    const list = [
-        {
-            mainText: 'Top 10',
-            subtitle: 'Position in dribbble',
-            info: '20% Increase from Last Week'
-        },
-        {
-            mainText: '26',
-            subtitle: 'New employees onboarded',
-            info: '15% Increase from Last Month'
-        },
-        {
-            mainText: '500',
-            subtitle: 'New Clients Approached',
-            info: '5% Increase from Last Week'
-        }
-    ]
+    const list = bigCards;
   return (
     <Grid display='flex' justifyContent='center' container spacing={2} height='45vh'>
         {

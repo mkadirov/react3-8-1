@@ -14,9 +14,7 @@ function UserCards() {
                 View All
             </Button>
         </Box>
-        
         <SmallCards/>
-
     </Box>
   )
 }

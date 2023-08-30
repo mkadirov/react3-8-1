@@ -14,9 +14,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import logoImg from '../../assets/logo.png'
 import DashbordIcon from '../../assets/Dashboard.png'
 import TeamsIcon from '../../assets/Teams.png'
@@ -25,12 +22,13 @@ import ProjectsIcon from '../../assets/Projects.png'
 import MeetingsIcon from '../../assets/Meetings.png'
 import TasksIcon from '../../assets/Tasks.png'
 import SettingsIcon from '../../assets/Settings.png'
-import IllustrationIcon from '../../assets/Illustration.png'
 import Image from 'next/image';
 import { grey } from '@mui/material/colors';
 import { Search } from '@mui/icons-material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { Avatar } from '@mui/material';
+import { menuList } from '@/data/Lists';
+import { useRouter } from 'next/router';
 
 
 const drawerWidth = 300;
@@ -75,15 +73,16 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
 
 export default function RootLayout({children}) {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
+  const router = useRouter();
 
+  console.log(router);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -91,6 +90,16 @@ export default function RootLayout({children}) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const StyledListItem = styled(ListItem)(({theme}) => ({
+    marginBottom: '10px',
+    '&:hover ,&.active': {
+      backgroundColor: theme.palette.primary.main,
+      color: 'white'
+    }
+  }))
+
+  const list = menuList;
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -155,35 +164,29 @@ export default function RootLayout({children}) {
           </IconButton>
         </Box>
         <Divider />
-        <List>
-          {[DashbordIcon, TeamsIcon, EmployeesIcon, ProjectsIcon].map((icon, index) => (
-            <ListItem key={icon} disablePadding>
-              <ListItemButton>
-                
-                <Box sx={{height: '30px', width: '80%'}}>
-                    <Image src={icon}/>
-                </Box>
+        <List sx={{marginTop: 2}}>
+          {list.map((item, index) => {
+            const path = item.path
+            const route = router.route
+            return (
+              <Box key={index}>
+                <StyledListItem   disablePadding className={ (route.startsWith(path) && path.length !=1 || path == route)? 'active' : 'inactive'}>
+              <ListItemButton
+                 onClick={() => router.push(item.path)}
+              >
+                {item.icon}
+                <Typography sx={{marginLeft: 2}}>
+                  {item.title}
+                </Typography>
               </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {[MeetingsIcon, TasksIcon, SettingsIcon].map((icon, index) => {
-            const key = index * 10
-            return(
-                
-            
-                    <ListItem key={key} disablePadding>
-                      <ListItemButton>
-                        <Box sx={{height: '30px', width: '80%'}}>
-                            <Image src={icon}/>
-                        </Box>
-                      </ListItemButton>
-                    </ListItem>
-                  
+            </StyledListItem>
+            {
+              index == 3? <Divider sx={{marginY: 2}}/> : <Box></Box>
+            }
+          </Box>
             )
-          })}
+           }
+          )}
         </List>
 
       </Drawer>
