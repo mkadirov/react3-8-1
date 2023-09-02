@@ -5,7 +5,7 @@ import RootLayout from '@/components/Layout/RootLayout'
 import { Grid, Typography } from '@mui/material'
 import React from 'react'
 
-export default function employees({data}) {
+export default function Employees({data}) {
 
   
   return (

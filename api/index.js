@@ -7,7 +7,7 @@ const getTeams = async() => {
         const res = await axios.get(baseUrl + 'teams')
         return {success: true, data: res.data}
     } catch (error) {
-        return { success: false}
+        return { success: false, data: []}
     }
 }
 
@@ -17,7 +17,7 @@ const getEmployees = async() => {
         const res = await axios.get(baseUrl + 'employees')
         return{success: true, data: res.data}
     } catch (error) {
-        return {success: false}
+        return {success: false, data: []}
     }
 }
 
@@ -27,7 +27,7 @@ const getTeamEmployees = async(team) => {
         const res = await axios.get(baseUrl + 'teams/' + team)
         return {success: true, data: res.data}
     } catch (error) {
-        return {success: false}
+        return {success: false, data: []}
     }
 }
 
@@ -36,7 +36,7 @@ const getTeamsData = async() => {
         const res = await axios.get(baseUrl + 'team_projects')
         return {success: true, data: res.data}
     } catch (error) {
-        return {success: false}
+        return {success: false, data: []}
     }
 }
 
