@@ -4,7 +4,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 import { Bar } from 'react-chartjs-2';
 
 
-function TeamChart() {
+function TeamChart({list}) {
         ChartJS.register(
         CategoryScale,
         LinearScale,
@@ -27,20 +27,16 @@ function TeamChart() {
         },
       };
       
-      const labels = ['A', 'B', 'C', 'D'];
-      
+      const labels = list.map(item => item.shortName);
+      const goals = list.map(item => item.goal);
+      const colors = list.map(item => item.color)
       const data = {
         labels,
         datasets: [
           {
             label: 'Dataset 1',
-            data: [1, 5, 3, 10],
-            backgroundColor: [
-              'orange',
-              'red',
-              'coral',
-              'green'
-            ]
+            data: goals,
+            backgroundColor: colors
           }
         ],
       };
@@ -54,28 +50,6 @@ function TeamChart() {
         alignItems: 'center'
       })
 
-      const list = [
-        { 
-            title: 'Marketing',
-            icon: 'A',
-            color: 'orange'
-        },
-        { 
-            title: 'Developer',
-            icon: 'B',
-            color: 'red'
-        },
-        { 
-            title: 'HR',
-            icon: 'C',
-            color: 'coral'
-        },
-        { 
-            title: 'Design',
-            icon: 'D',
-            color: 'green'
-        },
-      ]
 
   return (
     <Box sx={{border: '1px solid grey', p: '20px', height: {sm: '50vh', xl: '45vh'}}}>
@@ -88,10 +62,10 @@ function TeamChart() {
                     return(
                         <Grid item xs={6} key={idx} display='flex' alignItems='center' marginBottom={2} gap={2}>
                             <IconBtn sx={{backgroundColor: `${item.color}`}}>
-                                {item.icon}
+                                {item.shortName}
                             </IconBtn>
                             <Typography>
-                                {item.title}
+                                {item.name}
                             </Typography>
                         </Grid>
                     )

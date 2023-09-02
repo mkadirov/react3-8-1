@@ -1,13 +1,29 @@
+import { getTeams } from '@/api';
 import TeamCard from '@/components/Cards/TeamCard';
 import RootLayout from '@/components/Layout/RootLayout'
-import { teamList } from '@/data/Lists'
 import { Box, Grid, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-function teams() {
+export default function teams({data}) {
   const router = useRouter();
-  const list = teamList;
+
+
+  // const [list, setList] = useState([])
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const res = await getTeams();
+  //     console.log(res);
+  //     if(res.success) {
+  //       setList(res.data)
+  //     }
+  //   }
+
+  //   fetchData();
+  // }, [])
+  
+  
   return (
     <RootLayout>
         <Typography variant='h2' textAlign='center'>
@@ -17,10 +33,10 @@ function teams() {
         <Box marginTop={5}>
           <Grid container spacing={3}>
             {
-              list.map((item, idx) => {
+              data?.map((item, idx) => {
                 return (
                   <Grid key={idx} item xs={12} md={6} lg={3}>
-                    <Box onClick = {() => router.push('/teams' + item.path)}>
+                    <Box onClick = {() => router.push('/teams' + item.path)} >
                       <TeamCard item = {item} />
                     </Box>
                   </Grid>
@@ -33,4 +49,12 @@ function teams() {
   )
 }
 
-export default teams
+
+
+
+export async function getStaticProps(context) {
+  const res = await getTeams();
+  return {
+    props: {data: res.data}
+  }
+} 

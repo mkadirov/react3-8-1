@@ -82,7 +82,7 @@ export default function RootLayout({children}) {
   const [open, setOpen] = React.useState(true);
   const router = useRouter();
 
-  console.log(router);
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };

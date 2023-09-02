@@ -5,10 +5,15 @@ import { TortChart } from '@/components/Charts/TortChart';
 import BigCards from '@/components/Cards/BigCards';
 import LineChart from '@/components/Charts/LineChart';
 import UserCards from '@/components/Cards/UserCards';
+import { getTeamsData } from '@/api';
 
 
 
-export default function Home() {
+export default function Home({data}) {
+
+
+  
+
   return (
     <>
       <RootLayout>
@@ -16,7 +21,7 @@ export default function Home() {
          <Grid container spacing={2}>
 
           <Grid item xs= {12} md={4}>
-            <TeamChart/>
+            <TeamChart list={data}/>
           </Grid>
 
           <Grid item xs= {12} md={4}>
@@ -42,4 +47,12 @@ export default function Home() {
       </RootLayout>
     </>
   )
+}
+
+
+export async function getStaticProps(context) {
+  const res = await getTeamsData();
+  return {
+    props: {data: res.data}
+  }
 }
