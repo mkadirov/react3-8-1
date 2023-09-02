@@ -16,7 +16,7 @@ export default function Employees({data}) {
 
         <Grid container spacing={3} marginTop={5} >
             {
-                data.map((user, idx) => {
+                data?.map((user, idx) => {
                     return(
                         <Grid item sx={12} md= {6} lg= {4} xl= {3} key={idx}>
                             <UserCard item={user}/>
