@@ -154,7 +154,7 @@ export default function RootLayout({children}) {
       >
         <Box display='flex' justifyContent='space-between' marginY={2} marginLeft={1}>
             <Box sx={{display: 'flex', alignItems: 'center'}}>
-              <Image src={logoImg} />
+              <Image src={logoImg} alt='logo'/>
               <Typography sx={{color: '#7054e4', fontWeight: '700'}} variant='h5'>
                 Teamify
               </Typography>

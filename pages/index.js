@@ -17,7 +17,7 @@ export default function Home({data}) {
   return (
     <>
       <RootLayout>
-        <Container maxWidth sx={{marginTop: 4}}>
+        <Container  sx={{marginTop: 4}}>
          <Grid container spacing={2}>
 
           <Grid item xs= {12} md={4}>

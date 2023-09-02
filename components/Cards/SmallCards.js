@@ -14,7 +14,7 @@ function SmallCards() {
                 return (
                     <Box flex={1} display='flex' gap={2} key={idx} >
                         <Box sx={{width: '50px', height: '50px'}}>
-                            <img src={item.image} alt="" />
+                            <img src={item.image} alt="smalCardsFoto" />
                         </Box>
                         <Box>
                             <Typography>

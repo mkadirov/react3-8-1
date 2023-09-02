@@ -3,9 +3,9 @@ import TeamCard from '@/components/Cards/TeamCard';
 import RootLayout from '@/components/Layout/RootLayout'
 import { Box, Grid, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
 
-export default function teams({data}) {
+
+export default function Teams({data}) {
   const router = useRouter();
 
 
@@ -33,9 +33,9 @@ export default function teams({data}) {
         <Box marginTop={5}>
           <Grid container spacing={3}>
             {
-              data?.map((item, idx) => {
+              data?.map((item) => {
                 return (
-                  <Grid key={idx} item xs={12} md={6} lg={3}>
+                  <Grid key={item.id} item xs={12} md={6} lg={3}>
                     <Box onClick = {() => router.push('/teams' + item.path)} >
                       <TeamCard item = {item} />
                     </Box>
